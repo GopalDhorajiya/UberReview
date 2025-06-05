@@ -1,0 +1,38 @@
+package com.gopal.uberreviewservice.models;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import javax.print.attribute.standard.MultipleDocumentHandling;
+import java.util.Date;
+
+@Setter
+@Builder
+@NoArgsConstructor
+@Getter
+@AllArgsConstructor
+@Entity
+public class Booking extends BaseModel{
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Review review;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "booking_status")// store as a String Default is int
+    BookingStatus bookingStatus;
+
+    @Temporal(value = TemporalType.TIMESTAMP)
+    private Date startTime;
+
+    @Temporal(value = TemporalType.TIMESTAMP)
+    private Date endTime;
+
+    private long totalDistance;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Driver driver;
+
+    @ManyToOne
+    private Passenger passenger;
+
+}
