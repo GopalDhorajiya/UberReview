@@ -53,7 +53,7 @@ public class UberReviewServiceApplication implements CommandLineRunner {
         Optional<Driver> driver = driverRepository.findById(1L);
 
         Booking booking = Booking.builder().driver(driver.get()).passenger(passenger.get()).bookingStatus(BookingStatus.SCHEDULE).startTime(new Date()).endTime(new Date()).build();
-
+//
 //        booking = bookingRepository.save(booking);
 
 

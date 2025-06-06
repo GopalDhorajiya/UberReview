@@ -1,11 +1,10 @@
 package com.gopal.uberreviewservice.Controller;
 
 
+import com.gopal.uberreviewservice.Dtos.CreateReviewDto;
+import com.gopal.uberreviewservice.adepters.ReviewDtoToReviewAdepter;
 import com.gopal.uberreviewservice.models.Review;
-import com.gopal.uberreviewservice.repositories.BookingRepository;
-import com.gopal.uberreviewservice.repositories.ReviewRepository;
 import com.gopal.uberreviewservice.services.ReviewService;
-import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +15,12 @@ import org.springframework.web.bind.annotation.*;
 public class ReviewController {
 
     private final ReviewService reviewService;
+    private final ReviewDtoToReviewAdepter reviewDtoToReviewAdepter;
 
 
-    public ReviewController(@Autowired ReviewService reviewService) {
+    public ReviewController(@Autowired ReviewService reviewService, ReviewDtoToReviewAdepter reviewDtoToReviewAdepter) {
         this.reviewService = reviewService;
+        this.reviewDtoToReviewAdepter = reviewDtoToReviewAdepter;
     }
 
     @GetMapping("/")
@@ -40,9 +41,15 @@ public class ReviewController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Review> createReview(@RequestBody Review review) {
-        Review saved = reviewService.creatReview(review);
-        return new ResponseEntity<>(saved, HttpStatus.CREATED);
+    public ResponseEntity<?> createReview(@RequestBody CreateReviewDto createReviewDto) {
+        System.out.println(createReviewDto);
+        Review coming = reviewDtoToReviewAdepter.convertDto(createReviewDto);
+        if(coming == null)
+        {
+            return new ResponseEntity<>("Not Found Booking",HttpStatus.BAD_REQUEST);
+        }
+        coming = reviewService.creatReview(coming);
+        return new ResponseEntity<>(coming, HttpStatus.CREATED);
     }
 
 }

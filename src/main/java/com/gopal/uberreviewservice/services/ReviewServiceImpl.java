@@ -16,12 +16,10 @@ import java.util.Optional;
 public class ReviewServiceImpl implements ReviewService {// this CommandLineRunner will give method run will automatically run when starts application
 
     private final ReviewRepository reviewRepository;
-    private final BookingRepository bookingRepository;
 
 
-    public ReviewServiceImpl(@Autowired ReviewRepository reviewRepository, BookingRepository bookingRepository) {
+    public ReviewServiceImpl(@Autowired ReviewRepository reviewRepository) {
         this.reviewRepository = reviewRepository;
-        this.bookingRepository = bookingRepository;
     }
 
     @Override
@@ -32,18 +30,6 @@ public class ReviewServiceImpl implements ReviewService {// this CommandLineRunn
     @Override
     @Transactional // Ensure this method runs within a transaction
     public Review creatReview(Review reviewData) {
-        Long bookingId = reviewData.getBooking().getId();
-
-        Booking booking = bookingRepository.findById(bookingId)
-                .orElseThrow(() -> new RuntimeException("Booking not found"));
-
-        // Optional: Check if booking already has a review
-        if (booking.getReview() != null) {
-            throw new IllegalStateException("Review already exists for this booking");
-        }
-
-        reviewData.setBooking(booking);
-
         return reviewRepository.save(reviewData);
     }
 
