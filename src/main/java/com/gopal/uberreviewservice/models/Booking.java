@@ -1,5 +1,7 @@
 package com.gopal.uberreviewservice.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,9 +15,11 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @Entity
+@JsonIgnoreProperties({"review"})
 public class Booking extends BaseModel{
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "booking")
+    @JsonManagedReference
     private Review review;
 
     @Enumerated(EnumType.STRING)

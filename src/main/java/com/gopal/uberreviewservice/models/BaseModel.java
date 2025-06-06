@@ -20,7 +20,7 @@ public abstract class BaseModel {
     protected Long id;
 
     @Temporal(TemporalType.TIMESTAMP) // formate od date store is date and time both
-    @CreatedDate // this annotation tell spring that only handle for creat obj.
+    @CreatedDate // this annotation tells spring that only handles for creat obj.
     protected Date createdAt;
 
     @Column(nullable = false)

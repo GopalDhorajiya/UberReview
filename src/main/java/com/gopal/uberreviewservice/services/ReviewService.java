@@ -9,7 +9,12 @@ public interface ReviewService {
 
     Optional<Review> findReviewbyId(Long review_id);
 
+    Review creatReview(Review review);
+
     List<Review> findAllReview();
 
     boolean deleteReviewById(Long review_id);
+
+    List<Review> getAllReview();
+
 }
