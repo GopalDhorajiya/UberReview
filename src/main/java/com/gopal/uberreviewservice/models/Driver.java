@@ -27,4 +27,6 @@ public class Driver extends BaseModel{
     @OneToMany(mappedBy = "driver",fetch = FetchType.LAZY)   //  Lazy fetch will not attach booking lists at Driver object creation time then if needed then call query and give it
     @Fetch(FetchMode.SUBSELECT)  // query will run for only one time
     private List<Booking> bookings = new ArrayList<>();
+
+    private String address;
 }
