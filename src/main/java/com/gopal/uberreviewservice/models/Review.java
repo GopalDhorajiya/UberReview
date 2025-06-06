@@ -14,7 +14,6 @@ import lombok.*;
 @ToString
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-
 public class Review extends BaseModel{
 
     private String content;
@@ -24,6 +23,5 @@ public class Review extends BaseModel{
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(nullable = false)
-    @JsonBackReference
     private Booking booking;
 }

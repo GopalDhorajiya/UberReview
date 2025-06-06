@@ -1,8 +1,6 @@
 package com.gopal.uberreviewservice.services;
 
-import com.gopal.uberreviewservice.models.Booking;
 import com.gopal.uberreviewservice.models.Review;
-import com.gopal.uberreviewservice.repositories.BookingRepository;
 import com.gopal.uberreviewservice.repositories.ReviewRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,13 +1,7 @@
 package com.gopal.uberreviewservice.models;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
-
-import javax.print.attribute.standard.MultipleDocumentHandling;
 import java.util.Date;
-import java.util.List;
 
 @Setter
 @Builder
@@ -15,11 +9,9 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @Entity
-@JsonIgnoreProperties({"review"})
 public class Booking extends BaseModel{
 
     @OneToOne(mappedBy = "booking")
-    @JsonManagedReference
     private Review review;
 
     @Enumerated(EnumType.STRING)
