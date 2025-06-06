@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.print.attribute.standard.MultipleDocumentHandling;
 import java.util.Date;
+import java.util.List;
 
 @Setter
 @Builder
@@ -32,7 +33,7 @@ public class Booking extends BaseModel{
     @ManyToOne(fetch = FetchType.LAZY)
     private Driver driver;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Passenger passenger;
 
 }
